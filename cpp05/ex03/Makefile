@@ -1,0 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/03/18 14:18:15 by dgarcez-          #+#    #+#              #
+#    Updated: 2026/03/27 18:11:17 by dgarcez-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = intern
+
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98
+
+SOURCES =	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp Intern.cpp
+
+SRCS_DIR = srcs
+SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
+
+OBJS_DIR = objs
+OBJ_FILES =  $(addprefix $(OBJS_DIR)/, $(SOURCES:.cpp=.o))
+
+all: $(NAME)
+
+$(NAME): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
+
+clean:
+	@rm -rf $(OBJS_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+	rm -f *_shrubbery
+
+re: fclean all
