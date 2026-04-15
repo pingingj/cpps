@@ -5,31 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:58:27 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/03/31 14:38:44 by dgarcez-         ###   ########.fr       */
+/*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
+/*   Updated: 2026/04/15 16:25:34 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/Intern.hpp"
-#include "../incs/AForm.hpp"
-#include "../incs/Bureaucrat.hpp"
+#include "../incs/ScalarConverter.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-	Intern	tester;
-	AForm	*form;
-	Bureaucrat smart("Daniel", 1);
-	
-	form = tester.makeForm("robotomy request", "robot");
-	smart.executeForm(*form);
-	smart.signForm(*form);
-	delete form;
-	form = tester.makeForm("shrubberycreation", "shrub");
-	smart.executeForm(*form);
-	smart.signForm(*form);
-	delete form;
-	form = tester.makeForm("presidential pardon", "Pres");
-	smart.executeForm(*form);
-	smart.signForm(*form);
-	delete form;
+	if (argc != 2)
+	{
+		std::cout << "1 argument needed to execute program" << std::endl;
+		return (1);
+	}
+	ScalarConverter::converter(argv[1]);
 }
