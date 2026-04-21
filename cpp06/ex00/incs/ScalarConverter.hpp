@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:32 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/15 18:44:45 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/21 18:36:35 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <limits>
+#include <limits> // for max min
+#include <cmath> // for isnan isinf
+#include <algorithm> // for isdigit
+#include <cctype> // for isprint
 
 enum	e_type
 {
 	CHAR,
 	INT,
-	
+	FLOAT,
+	DOUBLE,
+	NaN,
+	INF,
+	INVALID
 };
 
 class ScalarConverter
