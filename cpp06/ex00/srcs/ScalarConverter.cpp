@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:42 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/21 19:05:07 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:27:56 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ e_type parse(std::string str)
 	double val;
 	char *flag;
 	
+	if (str == "inf" || str == "+inf" || str == "-inf" || str == "nan")
+		return (SPECIAL);
 	if (str.length() == 1 && std::isalpha(str[0]))
 		return (CHAR);
 	else if(str.find(".") != std::string::npos)
@@ -45,7 +47,9 @@ e_type parse(std::string str)
 		std::cout << "might be float or double " << std::endl;
 		if(str.find_first_not_of("1234567890.-f") != str.npos || std::count(str.begin(), str.end(), '-') > 1 ||  std::count(str.begin(), str.end(), '.') > 1||  std::count(str.begin(), str.end(), 'f') > 1)
 			return(INVALID);
-		if(str[str.length() - 1]== '.' || str[str.find('.') + 1 ] == 'f')
+		if(str[str.find('f') + 1] != '\0')
+			return (INVALID);
+		if(str[str.length() - 1] == '.')
 			return(INVALID);
 		if(str.find('-') != std::string::npos && str.find('-') != 0)
 			return(INVALID);
@@ -58,10 +62,8 @@ e_type parse(std::string str)
 	{
 		std::cout << "might be int" << std::endl;
 		val = std::strtod(str.c_str(),&flag);
-		if (std::isnan(val))
-			return (NaN);
-		if (std::isinf(val))
-			return (INF);
+		if (std::isnan(val) || std::isinf(val))
+			return (SPECIAL);
 		if(*flag == 'f' && *(flag + 1) == '\0')
 			return (FLOAT);
 		else if (*flag != '\0')
@@ -88,7 +90,7 @@ void	char_converter(char val)
 void	int_converter(int val)
 {
 	std::cout << "identified as int" << std::endl;
-	if (val >= 0 && val <= 127)
+	if (val >= 0 && val <= 127 && std::isprint(static_cast<int>(val)))
 		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
@@ -100,11 +102,14 @@ void	int_converter(int val)
 void	float_converter(float val)
 {
 	std::cout << "identified as float" << std::endl;
-	if (val >= 0 && val <= 127)
+	if (val >= 0 && val <= 127 && std::isprint(static_cast<int>(val)))
 		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << static_cast<int>(val) << std::endl;
+	if (val < -std::numeric_limits<int>::max() || val > std::numeric_limits<int>::max())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(val) << std::endl;
 	std::cout << "float: " << val << std::endl;
 	std::cout << "double: " << static_cast<double>(val) << std::endl;
 }
@@ -112,12 +117,24 @@ void	float_converter(float val)
 void	double_converter(double val)
 {
 	std::cout << "identified as double" << std::endl;
-	if (val >= 0 && val <= 127)
+	if (val >= 0 && val <= 127 && std::isprint(static_cast<int>(val)))
 		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << static_cast<int>(val) << std::endl;
+	if (val < -std::numeric_limits<int>::max() || val > std::numeric_limits<int>::max())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(val) << std::endl;
 	std::cout << "float: " << static_cast<float>(val) << std::endl;
+	std::cout << "double: " << val << std::endl;
+}
+
+void	special_converter(double val)
+{
+	std::cout << "identified as special" << std::endl;
+	std::cout << "char: Non displayable" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: " << val << "f" << std::endl;
 	std::cout << "double: " << val << std::endl;
 }
 
@@ -141,6 +158,8 @@ void ScalarConverter::converter(std::string str)
 		float_converter(std::strtof(str.c_str(), NULL));
 	else if (res == DOUBLE)
 		double_converter(std::strtod(str.c_str(), NULL));
+	else if (res == SPECIAL)
+		special_converter(std::strtod(str.c_str(), NULL));
 	// val = std::strtod(str.c_str(), NULL);
 	// char c = static_cast<char>(val);
 	// std::cout << "char: ";

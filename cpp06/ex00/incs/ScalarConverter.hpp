@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:32 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/21 18:36:35 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:03:41 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ enum	e_type
 	INT,
 	FLOAT,
 	DOUBLE,
-	NaN,
-	INF,
+	SPECIAL,
 	INVALID
 };
 
