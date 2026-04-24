@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:42 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/23 18:27:56 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:39:57 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ e_type parse(std::string str)
 	double val;
 	char *flag;
 	
+	if (str.length() == 0)
+		return (INVALID);
 	if (str == "inf" || str == "+inf" || str == "-inf" || str == "nan")
 		return (SPECIAL);
 	if (str.length() == 1 && std::isalpha(str[0]))
@@ -47,9 +49,9 @@ e_type parse(std::string str)
 		std::cout << "might be float or double " << std::endl;
 		if(str.find_first_not_of("1234567890.-f") != str.npos || std::count(str.begin(), str.end(), '-') > 1 ||  std::count(str.begin(), str.end(), '.') > 1||  std::count(str.begin(), str.end(), 'f') > 1)
 			return(INVALID);
-		if(str[str.find('f') + 1] != '\0')
+		if(str.find('f') != std::string::npos && str[str.find('f') + 1] != '\0')
 			return (INVALID);
-		if(str[str.length() - 1] == '.')
+		if(str[str.find(".") + 1] == '\0' || str[str.find(".") + 1] == 'f')
 			return(INVALID);
 		if(str.find('-') != std::string::npos && str.find('-') != 0)
 			return(INVALID);
@@ -143,8 +145,10 @@ void ScalarConverter::converter(std::string str)
 	e_type res;
 
 	res = parse(str);
+	std::cout << std::fixed << std::setprecision(2);
 	if (res == INVALID)
 	{
+		std::cout << "identified as impossible" << std::endl;
 		std::cout << "char: Non displayable" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: impossible" << std::endl;

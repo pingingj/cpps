@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:32 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/23 18:03:41 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:30:24 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <cmath> // for isnan isinf
 #include <algorithm> // for isdigit
 #include <cctype> // for isprint
+#include <iomanip>
 
 enum	e_type
 {
