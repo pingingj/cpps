@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:42 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/24 15:39:57 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/29 13:48:51 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ e_type parse(std::string str)
 	{
 		std::cout << "might be int" << std::endl;
 		val = std::strtod(str.c_str(),&flag);
-		if (std::isnan(val) || std::isinf(val))
-			return (SPECIAL);
 		if(*flag == 'f' && *(flag + 1) == '\0')
 			return (FLOAT);
 		else if (*flag != '\0')
@@ -85,7 +83,7 @@ void	char_converter(char val)
 	else
 		std::cout << "char: Non displayable" << std::endl;
 	std::cout << "int: " << static_cast<int>(val) << std::endl;
-	std::cout << "float: " << static_cast<float>(val) << std::endl;
+	std::cout << "float: " << static_cast<float>(val) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(val) << std::endl;
 }
 
@@ -97,7 +95,7 @@ void	int_converter(int val)
 	else
 		std::cout << "char: Non displayable" << std::endl;
 	std::cout << "int: " << val << std::endl;
-	std::cout << "float: " << static_cast<float>(val) << std::endl;
+	std::cout << "float: " << static_cast<float>(val) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(val) << std::endl;
 }
 
@@ -108,11 +106,11 @@ void	float_converter(float val)
 		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	if (val < -std::numeric_limits<int>::max() || val > std::numeric_limits<int>::max())
+	if (std::isnan(val) || val < -std::numeric_limits<int>::max() || val > std::numeric_limits<int>::max())
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(val) << std::endl;
-	std::cout << "float: " << val << std::endl;
+	std::cout << "float: " << val << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(val) << std::endl;
 }
 
@@ -127,7 +125,7 @@ void	double_converter(double val)
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(val) << std::endl;
-	std::cout << "float: " << static_cast<float>(val) << std::endl;
+	std::cout << "float: " << static_cast<float>(val) << "f" << std::endl;
 	std::cout << "double: " << val << std::endl;
 }
 
@@ -145,7 +143,7 @@ void ScalarConverter::converter(std::string str)
 	e_type res;
 
 	res = parse(str);
-	std::cout << std::fixed << std::setprecision(2);
+	std::cout << std::fixed << std::setprecision(1);
 	if (res == INVALID)
 	{
 		std::cout << "identified as impossible" << std::endl;
@@ -164,30 +162,5 @@ void ScalarConverter::converter(std::string str)
 		double_converter(std::strtod(str.c_str(), NULL));
 	else if (res == SPECIAL)
 		special_converter(std::strtod(str.c_str(), NULL));
-	// val = std::strtod(str.c_str(), NULL);
-	// char c = static_cast<char>(val);
-	// std::cout << "char: ";
-	// if (std::isprint(c) && val <= 127 && val >= 0)
-	// 	std::cout << "'" << c << "'" << std::endl;
-	// else
-	// 	std::cout << "Non displayable" << std::endl;
-	// int num = static_cast<int>(val);
-	// std::cout << "int: ";
-	// if (val >= -std::numeric_limits<int>::max() && val <= std::numeric_limits<int>::max())
-	// 	std::cout << num << std::endl;
-	// else
-	// 	std::cout << "impossible" << std::endl;
-	// float fnum = static_cast<float>(val);
-	// std::cout << "float limits " << -std::numeric_limits<float>::max() << " max " << std::numeric_limits<float>::max() << std::endl;
-	// std::cout << "float: ";
-	// if (val >= -std::numeric_limits<float>::max() && val <= std::numeric_limits<float>::max())
-	// 	std::cout << fnum << "f" << std::endl;
-	// else
-	// 	std::cout << "impossible" << std::endl;
-	// std::cout << "double limits " << -std::numeric_limits<double>::max() << " max " << std::numeric_limits<double>::max() << std::endl;	
-	// std::cout << "double: ";
-	// if (val >= -std::numeric_limits<double>::max() && val <= std::numeric_limits<double>::max())
-	// 	std::cout << val << std::endl;
-	// else
-	// 	std::cout << "impossible" << std::endl;
+
 }
