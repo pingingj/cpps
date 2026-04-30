@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/24 18:47:16 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/29 14:17:26 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main()
 	test = generate();
 	identify(test);
 	identify(*test);
-	
 	delete test;
+	test = NULL;
+	identify(test);
+	identify(*test);
 }

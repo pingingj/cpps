@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:19:42 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/04/29 13:48:51 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/04/30 14:07:45 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void ScalarConverter::converter(std::string str)
 	e_type res;
 
 	res = parse(str);
-	std::cout << std::fixed << std::setprecision(1);
+	std::cout << std::fixed << std::setprecision(2);
 	if (res == INVALID)
 	{
 		std::cout << "identified as impossible" << std::endl;
