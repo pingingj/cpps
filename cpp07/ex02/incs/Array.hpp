@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 16:13:38 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/04 17:45:16 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/08 18:19:28 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <iostream>
 #include <stdexcept>
 
-template <typename T> class Array
+template <typename T>
+class Array
 {
 	private:
 		T *array;
@@ -31,9 +32,10 @@ template <typename T> class Array
 		//overloads
 		Array &operator=(const Array &obj);
 		T &operator[](unsigned int index);
-
+		const T &operator[](unsigned int index) const;
+		
 		//funcs
-		unsigned int size();
+		unsigned int size() const;
 };
 #include "Array.tpp"
 

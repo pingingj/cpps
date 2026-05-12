@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:22:55 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/04 15:29:48 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/08 18:20:30 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 #include <iostream>
 
-template <typename T> void swap(T &x, T &y)
+template <typename T>
+void swap(T &x, T &y)
 {
+	std::cout << "SWAP!" << std::endl;
 	T temp;
 
 	temp = x;
@@ -24,7 +26,8 @@ template <typename T> void swap(T &x, T &y)
 	y = temp;
 }
 
-template <typename T> T min(T x, T y)
+template <typename T>
+T min(T &x, T &y)
 {
 	if (x < y)
 		return (x);
@@ -32,7 +35,8 @@ template <typename T> T min(T x, T y)
 		return (y);
 }
 
-template <typename T> T max(T x, T y)
+template <typename T>
+T max(T &x, T &y)
 {
 	if (x > y)
 		return (x);
