@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:15:14 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/05 17:25:00 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/14 17:10:33 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <algorithm>
 #include <iterator>
 
-template <typename T> int easyfind(T container, int num);
+template <typename T> 
+typename T::iterator easyfind(T &container, int num);
+
+#include "easyfind.tpp"
 
 #endif

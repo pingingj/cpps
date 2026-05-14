@@ -6,11 +6,11 @@
 #    By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/15 16:24:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/05/04 15:30:12 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/05/14 17:10:51 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = templates
+NAME = container
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98

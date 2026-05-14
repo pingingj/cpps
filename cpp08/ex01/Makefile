@@ -6,16 +6,16 @@
 #    By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/15 16:24:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/05/04 15:53:39 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/05/14 17:53:43 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = iter
+NAME = span
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SOURCES =	main.cpp
+SOURCES =	Span.cpp main.cpp
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
