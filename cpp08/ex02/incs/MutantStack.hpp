@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/04 16:13:38 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/19 17:28:00 by dgarcez-         ###   ########.fr       */
+/*   Created: 2026/05/19 17:09:10 by dgarcez-          #+#    #+#             */
+/*   Updated: 2026/05/19 17:57:54 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARRAY_HPP
-#define ARRAY_HPP
+#ifndef MUTANTSTACK_HPP
+#define MUTANTSTACK_HPP
 
 #include <iostream>
-#include <stdexcept>
+#include <list>
 
 template <typename T>
-class Array
+class MutantStack : std::stack<T>
 {
 	private:
-		T *array;
-		unsigned int n; // size
+		std::list<T> stack;
 	public:
-		//constructors
-		Array();
-		Array(unsigned int n);
-		Array(const Array &obj);
-		~Array();
+		MutantStack();
+		MutantStack(const MutantStack &obj);
+		MutantStack &operator=(const MutantStack &obj);
+		~MutantStack();
+		void push(T val);
+		void pop();
+		size_t size();
+		typename std::list<T>::iterator top();
+		std::list<T>::iterator start();
+		std::list<T>::iterator end();
 		
-		//overloads
-		Array &operator=(const Array &obj);
-		T &operator[](unsigned int index);
-
-		//funcs
-		unsigned int size();
 };
-#include "Array.tpp"
 
 #endif

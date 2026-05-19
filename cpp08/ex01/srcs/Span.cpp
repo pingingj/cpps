@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 17:22:00 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/14 19:04:26 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:28:49 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	Span::addNumber(int val)
 	if (this->span.size() < this->N)
 		this->span.push_back(val);
 	else
-		throw std::length_error("exceeded the amount of elements!");
+		throw std::length_error("Exceeded the amount of elements!");
 }
 
 int		Span::shortestSpan()
@@ -70,10 +70,11 @@ int		Span::shortestSpan()
 	int diff = std::numeric_limits<int>::max();
 	std::vector<int>::iterator i = this->span.begin();
 	std::vector<int>::iterator j;
+	if (this->span.size() <= 1)
+		throw std::out_of_range("Span is too small!");
 	while(i != this->span.end())
 	{
-		j = i;
-		++j;
+		j = i + 1;
 		while(j != this->span.end())
 		{
 			res = std::abs(*i - *j);
@@ -84,6 +85,40 @@ int		Span::shortestSpan()
 		i++;
 	}
 	return (diff);
+}
+
+int		Span::longestSpan()
+{
+	int res;
+	int big = 0;
+	std::vector<int>::iterator i = this->span.begin();
+	std::vector<int>::iterator j;
+	if (this->span.size() <= 1)
+		throw std::out_of_range("Span is too small!");
+	while(i != this->span.end())
+	{
+		j = i + 1;
+		while(j != this->span.end())
+		{
+			res = std::abs(*i - *j);
+			if (res > big)
+				big = res;
+			j++;
+		}
+		i++;
+	}
+	return (big);
+}
+
+
+void	Span::addMoreNums(int start, int end)
+{
+	if (start > end)
+		throw std::invalid_argument("Invalid range of numbers, start has to be smaller than end of range!");
+	if (this->span.size() >= this->N)
+		throw std::length_error("Exceeded the amount of elements!");
+	for (int i = start; i <= end; i++)
+		this->addNumber(i);
 }
 
 std::ostream &operator<<(std::ostream &os, const Span &obj)
