@@ -6,14 +6,16 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/04 17:40:55 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:27:30 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/Array.hpp"
+#include "../incs/MutantStack.hpp"
 
 int main()
 {
-	Array<char *> nums(5);
+	MutantStack<int> test;
 
+	test.push(5);
+	
 }

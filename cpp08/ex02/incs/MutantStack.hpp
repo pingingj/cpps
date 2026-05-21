@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:09:10 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/19 17:57:54 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:59:07 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 #define MUTANTSTACK_HPP
 
 #include <iostream>
-#include <list>
+#include <deque>
+#include <stack>
 
-template <typename T>
-class MutantStack : std::stack<T>
+template <typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T,Container>
 {
 	private:
-		std::list<T> stack;
+
 	public:
 		MutantStack();
 		MutantStack(const MutantStack &obj);
 		MutantStack &operator=(const MutantStack &obj);
 		~MutantStack();
-		void push(T val);
-		void pop();
-		size_t size();
-		typename std::list<T>::iterator top();
-		std::list<T>::iterator start();
-		std::list<T>::iterator end();
-		
+		// std::deque<T>::iterator start();
+		// std::deque<T>::iterator end();
 };
+
+#include "MutantStack.tpp"
 
 #endif
