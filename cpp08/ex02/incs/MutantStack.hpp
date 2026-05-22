@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:09:10 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/21 17:59:07 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/22 14:17:25 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,24 @@ class MutantStack : public std::stack<T,Container>
 		MutantStack(const MutantStack &obj);
 		MutantStack &operator=(const MutantStack &obj);
 		~MutantStack();
-		// std::deque<T>::iterator start();
-		// std::deque<T>::iterator end();
+		typedef typename std::stack<T, Container>::container_type::iterator iterator;
+		typedef typename std::stack<T, Container>::container_type::const_iterator const_iterator;
+		iterator begin()
+		{
+			return (this->c.begin());
+		}
+		iterator end()
+		{
+			return (this->c.end());
+		}
+		const_iterator cbegin() const
+		{
+			return (this->c.begin());
+		}
+		const_iterator cend() const
+		{
+			return (this->c.end());
+		}
 };
 
 #include "MutantStack.tpp"

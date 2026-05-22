@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:09:50 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/21 18:02:27 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/22 14:23:32 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ MutantStack<T, Container>::MutantStack() : std::stack<T, Container>()
 template <typename T, typename Container>
 MutantStack<T, Container>::~MutantStack()
 {
-	std::cout << "MutantStack default killer" << std::endl;
+	std::cout << "MutantStack default detructor" << std::endl;
 }
 
 template <typename T, typename Container>
@@ -35,12 +35,6 @@ MutantStack<T, Container> &MutantStack<T, Container>::operator=(const MutantStac
 {
 	if (this != &obj)
 	{
-		this.
+		this->c = obj.c;
 	}
 }
-
-// template <typename T>
-// MutantStack<T>::~MutantStack()
-// {
-// 	this->stack.clear();
-// }
