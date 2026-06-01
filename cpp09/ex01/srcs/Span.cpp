@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 17:22:00 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/29 14:37:47 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:28:49 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ Span &Span::operator=(const Span &obj)
 {
 	if (this != &obj)
 	{
+		this->span.erase(this->span.begin(), this->span.end());
 		this->span = obj.span;
 		this->N = obj.N;
 	}
@@ -50,7 +51,7 @@ Span::~Span()
 	this->span.erase(this->span.begin(), this->span.end());
 }
 
-std::vector<int> Span::getSpan(void) const
+std::vector<int> Span::getSpan() const
 {
 	return (this->span);
 }
@@ -63,33 +64,50 @@ void	Span::addNumber(int val)
 		throw std::length_error("Exceeded the amount of elements!");
 }
 
-int		Span::shortestSpan(void)
+int		Span::shortestSpan()
 {
 	int res;
 	int diff = std::numeric_limits<int>::max();
+	std::vector<int>::iterator i = this->span.begin();
+	std::vector<int>::iterator j;
 	if (this->span.size() <= 1)
 		throw std::out_of_range("Span is too small!");
-	std::vector<int> sorted = this->span;
-	std::sort(sorted.begin(), sorted.end());
-	std::vector<int>::iterator i = sorted.begin();
-	while(i + 1 != sorted.end())
+	while(i != this->span.end())
 	{
-		int temp = *i;
+		j = i + 1;
+		while(j != this->span.end())
+		{
+			res = std::abs(*i - *j);
+			if (res < diff)
+				diff = res;
+			j++;
+		}
 		i++;
-		res = (*i) - temp;
-		if (res < diff)
-			diff = res;
 	}
 	return (diff);
 }
 
-int		Span::longestSpan(void)
+int		Span::longestSpan()
 {
+	int res;
+	int big = 0;
+	std::vector<int>::iterator i = this->span.begin();
+	std::vector<int>::iterator j;
 	if (this->span.size() <= 1)
 		throw std::out_of_range("Span is too small!");
-	std::vector<int> sorted = this->span;
-	std::sort(sorted.begin(), sorted.end());
-	return (sorted.at((sorted.size() - 1)) - sorted.at(0));
+	while(i != this->span.end())
+	{
+		j = i + 1;
+		while(j != this->span.end())
+		{
+			res = std::abs(*i - *j);
+			if (res > big)
+				big = res;
+			j++;
+		}
+		i++;
+	}
+	return (big);
 }
 
 
@@ -113,7 +131,7 @@ std::ostream &operator<<(std::ostream &os, const Span &obj)
 	std::vector<int>::iterator i = tmp.begin();
 	while(i < tmp.end())
 	{
-		os << *i << " ";
+		os << *i << std::endl;
 		i++;
 	}
 	return (os);

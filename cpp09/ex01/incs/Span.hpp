@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 17:22:02 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/29 14:37:22 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:16:04 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <vector>
-// #include <algorithm>
 
 class Span
 {
@@ -34,8 +33,8 @@ class Span
 		std::vector<int> getSpan() const;
 
 		void	addNumber(int val);
-		int		shortestSpan(void);
-		int		longestSpan(void);
+		int		shortestSpan();
+		int		longestSpan();
 		void	addMoreNums(int start, int end);
 };
 

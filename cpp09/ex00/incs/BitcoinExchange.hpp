@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.tpp                                       :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 17:25:23 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/29 13:22:35 by dgarcez-         ###   ########.fr       */
+/*   Created: 2026/05/28 15:27:20 by dgarcez-          #+#    #+#             */
+/*   Updated: 2026/06/01 18:55:40 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
-template <typename T>
-typename T::iterator easyfind(T &container, int num)
-{
-	typename T::iterator i;
+#include <iostream>
+#include <fstream>
+#include <map>
+#include <cstdlib>
+#include <algorithm> 
 
-	i = std::find(container.begin(), container.end(), num);
-	if (i != container.end())
-		return (i);
-	else
-		return (container.end());
-}
+#endif

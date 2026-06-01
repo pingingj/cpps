@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:09:50 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/05/29 14:37:11 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/05/28 14:03:24 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ MutantStack<T, Container> &MutantStack<T, Container>::operator=(const MutantStac
 	{
 		this->c = obj.c;
 	}
+	return (*this);
+}
+
+template <typename T, typename Container>
+typename MutantStack<T, Container>::iterator MutantStack<T, Container>::begin()
+{
+	return (this->c.begin());
 }
