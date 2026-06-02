@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/01 19:00:51 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/02 14:29:47 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,29 @@ bool	parse_files(std::ifstream &input_file, std::ifstream &data)
 	return (true);
 }
 
-bool	parse_database(std::string &date, std::string &value)
+bool	parse_btc(std::string &date, std::string &value)
 {
+	if (date.empty() == true || value.empty() == true)
+	{
+		std::cerr << " empty ";
+		return (false);
+	}
 	if (value.find_first_not_of("1234567890.") != value.npos || std::count(value.begin(), value.end(), '.') > 1)
+	{
+		std::cerr << " not a number ";
 		return (false);
+	}
 	if (value == ".")
+	{
+		std::cerr << " just a dot ";
 		return (false);
-	
+	}
+	if (date.find_first_not_of("1234567890-") != date.npos)
+	{
+		std::cerr << " not a date ";
+		return (false);
+	}
+	return (true);
 }
 
 bool make_database(std::map<std::string, double> &db, std::ifstream &data)
@@ -69,10 +85,10 @@ bool make_database(std::map<std::string, double> &db, std::ifstream &data)
 	{
 		date = line.substr(0, line.find(','));
 		value = line.substr(line.find(',') + 1);
-		std::cout << line.substr(0, line.find(',')) << "$ ";
-		std::cout << line.substr(line.find(',') + 1) << "$";
+		std::cout << date << "$ ";
+		std::cout << value << "$";
 		
-		if (value.empty() == false && date.empty() == false)
+		if (parse_btc(date, value) == true)
 		{
 			std::cout << "-> Insterted!!";
 			db.insert(std::make_pair(date, std::strtod(value.c_str(), NULL)));
