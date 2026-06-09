@@ -6,7 +6,7 @@
 #    By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/15 16:24:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/06/01 16:52:58 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/06/09 15:22:35 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = btc
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SOURCES =	main.cpp
+SOURCES =	main.cpp BitcoinExchange.cpp
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))

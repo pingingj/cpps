@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/28 15:27:20 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/09 15:21:46 by dgarcez-         ###   ########.fr       */
+/*   Created: 2026/06/09 15:40:06 by dgarcez-          #+#    #+#             */
+/*   Updated: 2026/06/09 17:13:48 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
+#ifndef RPN_HPP
+#define RPN_HPP
 
 #include <iostream>
-#include <fstream>
-#include <map>
-#include <cstdlib>
-#include <algorithm>
-
-#define DB false
-#define INPUT true
-
-typedef struct s_date
-{
-	int day;
-	int month;
-	int year;
-} t_date;
-
-void	search_btc(std::ifstream &input_file, std::map<std::string, float> &db);
-bool	parse(std::ifstream &input_file, std::map<std::string, float> &db);
-
+#include <stack>
+#include <sstream>
+#include <cstring>
+#include <cctype>
 #endif
