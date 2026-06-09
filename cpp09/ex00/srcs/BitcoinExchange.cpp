@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:28:03 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/09 15:39:15 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:42:40 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static bool	parse_files(std::ifstream &input_file, std::ifstream &data)
 
 static bool	parse_date(t_date &d)
 {
+	if (d.day == 0 || d.month == 0 || d.year == 0)
+		return(false);
 	switch (d.month)
 	{
 		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -76,11 +78,6 @@ bool	input_parse(std::string &date, std::string &value)
 		std::cerr << "Error: Invalid size of value or date" << std::endl;
 		return (false);
 	}
-	if (strtod(value.c_str(), NULL) > 1000)
-	{
-		std::cerr << "Error: No values above 1000" << std::endl;
-		return (false);
-	}
 	if ((value.find_first_not_of("1234567890. ") != value.npos || std::count(value.begin(), value.end(), '.') > 1))
 	{
 		std::cerr << "Error: Invalid value" << std::endl;
@@ -94,6 +91,11 @@ bool	input_parse(std::string &date, std::string &value)
 	if ((std::count(value.begin(), value.end(), ' ') != 1 || std::count(date.begin(), date.end(), ' ') != 1 ||(*value.begin()) != ' ' || (*date.rbegin()) != ' '))
 	{
 		std::cerr << "Error: Input must have 1 space between pipe \"xxxx-xx-xx | x\"" << std::endl;
+		return (false);
+	}
+	if (strtod(value.c_str(), NULL) > 1000)
+	{
+		std::cerr << "Error: No values above 1000" << std::endl;
 		return (false);
 	}
 	if (value == " .")
@@ -198,6 +200,7 @@ void	search_btc(std::ifstream &input_file, std::map<std::string, float> &db)
 	{
 		date = line.substr(0, line.find('|'));
 		value = line.substr(line.find('|') + 1);
+		std::cout << "Value == " << value << std::endl;
 		if (parse_btc(date, value, INPUT) == true)
 		{
 			it = db.upper_bound(date);

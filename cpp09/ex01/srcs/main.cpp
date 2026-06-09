@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/09 17:43:57 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:00:12 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,14 @@ bool	rpn(std::istringstream &split, std::stack<int> &stack)
 		}
 		else
 		{
-			calculate(token, stack);
+			if (calculate(token, stack) == false)
+				return (false);
 		}
+	}
+	if (token.empty())
+	{
+		std::cerr << "Error: Empty";
+		return (false);
 	}
 	if (token.find_first_not_of("-+*/") != token.npos)
 	{
@@ -92,7 +98,7 @@ int main(int argc, char **argv)
 {
 	if(argc != 2)
 	{
-		std::cerr << "Invalid amount of arguments. example: ./RPN \"8 9 * 9 +\"";
+		std::cerr << "Invalid amount of arguments. example: ./RPN \"8 9 * 9 +\"" << std::endl;
 		return (1);
 	}
 	std::stack<int> stack;
@@ -100,5 +106,10 @@ int main(int argc, char **argv)
 	std::istringstream split(input);
 	if (rpn(split, stack) == false)
 		return (1);
-	std::cout << stack.top() << std::endl;
+	if (stack.size() > 1)
+	{
+		std::cerr << "Error: Needed more operators" << std::endl;
+	}
+	else
+		std::cout << stack.top() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:22:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/09 15:39:32 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:30:20 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Invalid amount of arguments! ./bitcoin <input_file>" << std::endl;
+		std::cerr << "Invalid amount of arguments! ./btc <input_file>" << std::endl;
 		return (1);
 	}
 	std::map<std::string, float>	db;
