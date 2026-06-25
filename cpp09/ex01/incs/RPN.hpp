@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:40:06 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/09 17:13:48 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/11 15:43:45 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <stack>
 #include <sstream>
-#include <cstring>
-#include <cctype>
+
+bool	rpn(std::istringstream &split, std::stack<int> &stack);
+
 #endif
