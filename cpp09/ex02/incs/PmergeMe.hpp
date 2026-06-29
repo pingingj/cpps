@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:48:46 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/24 22:09:17 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/29 19:32:25 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,24 @@
 #include <limits>
 #include <cstdlib>
 
-template <typename container>
-void	print_container(container &cont)
+template <typename Container>
+void	print_container_pair(Container &cont)
 {
-	typename container::iterator it;
+	typename Container::iterator it;
+	it = cont.begin();
+	while(it != cont.end())
+	{
+		std::cout << " (" << it->first << ", " << it->second << ") ";
+		// std::cout << *it << " ";
+		++it;
+	}
+	std::cout << std::endl;
+}
+
+template <typename Container>
+void	print_container(Container &cont)
+{
+	typename Container::iterator it;
 	it = cont.begin();
 	while(it != cont.end())
 	{
@@ -43,30 +57,28 @@ class PmergeMe
 		int				_straggler;
 		bool			_hasStraggler;
 		
-		template <typename c_pair>
-		c_pair init_container()
+
+		void	ford_vector(int recurs_lvl);
+		void	ford_deque(int recurs_lvl);
+		std::vector<int> jacobsthal(size_t n);
+		void	use_jacobsthal(std::vector<std::pair<int, int> > &vect_pair,int &n_per_pair, std::vector<int> &main_chain, std::vector<int> &pend);
+		std::vector	<int>init_chains(std::vector<std::pair<int, int> > &vect_pair, int &n_per_pair, std::vector<int> &pend);
+
+
+		template <typename c_pair, typename Container>
+		c_pair init_container(Container &cont, int &n_per_pair)
 		{
-			c_pair cont;
-			int	x;
-			int y;
-			for(size_t i = 0; i + 1 < this->_vec.size(); i += 2)
+			c_pair cont_pair;
+			for(size_t i = n_per_pair - 1; i + n_per_pair < cont.size(); i += n_per_pair * 2)
 			{
-				x = this->_vec[i];
-				y = this->_vec[i + 1];
-				if (x > y)
-					std::swap(x, y);
-				cont.push_back(std::make_pair(x, y));
+				if (cont.at(i) > cont.at(i + n_per_pair))
+					std::swap_ranges(cont.begin() + i - (n_per_pair - 1), cont.begin() + i + 1, cont.begin() + i + 1);
+				cont_pair.push_back(std::make_pair(cont.at(i), cont.at(i + n_per_pair)));
 			}
-			if (this->_vec.size() % 2 != 0)
-			{
-				_hasStraggler = true;
-				_straggler = this->_vec.back();
-			}
-			return cont;
+			return cont_pair;
 		}
 
-		template <typename container>
-		container
+
 	
 	public:
 		//constructors
