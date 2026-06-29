@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 18:02:05 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/29 20:01:25 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/29 22:33:50 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ std::vector<int> PmergeMe::jacobsthal(size_t n)
 {
 	size_t	num;
 	std::vector<int> seq;
-	seq.push_back(0);
-	seq.push_back(1);
+	seq.push_back(3);
+	if (n <= 2)
+		return (seq);
+	seq.push_back(5);
+	if (n <= 5)
+		return (seq);
 	for(int i = 2; i; i++)
 	{
 		num = seq[i - 1] + 2 * seq[i - 2];
@@ -103,21 +107,65 @@ std::vector	<int>PmergeMe::init_chains(std::vector<std::pair<int, int> > &vect_p
 	return(main_chain);
 }
 
+void	PmergeMe::binarysearch(std::vector<int> &main_chain, std::vector<int> &pend, int &to_compare, int &n_per_pair, size_t &right)
+{
+	(void)pend;
+	size_t left = 0;
+	while (left <= right)
+	{
+		size_t middle = (left + right) / 2;
+		size_t index = middle * n_per_pair + (n_per_pair - 1);
+		std::cout << "comparing " << to_compare << " with " << main_chain[index] << std::endl;
+		if(to_compare < main_chain[index])
+		{
+			if(middle == 0)
+			{
+				left = 0;
+				break;
+			}
+			right = middle - 1;
+		}
+		else
+		{
+			left = middle + 1;
+		}
+	}
+	std::cout << "left: " << left << std::endl;
+}
+
 void	PmergeMe::use_jacobsthal(std::vector<std::pair<int, int> > &vect_pair,int &n_per_pair, std::vector<int> &main_chain, std::vector<int> &pend)
 {
+	std::cout << "----------------------------STARTING JACOBING----------------------------" << std::endl;
+	print_container_pair(vect_pair);
 	(void)pend;
 	(void)vect_pair;
 	// (void)n_per_pair;
 	(void)main_chain;
-	// int	order = 0;
+	int	order = 0;
+	int	prev_order = 1;
 	std::vector<int> seq;
 	seq = jacobsthal(pend.size() / n_per_pair);
 	std::cout << "jacob sequence for size " << pend.size() / n_per_pair << ": ";
 	print_container(seq);
-	// for(int i = 0; i < seq.size(); i++)
-	// {
-	// 	order = seq[i];
-	// }
+	for(size_t i = 0; i < seq.size(); i++)
+	{
+		order = seq[i];
+		for(int j = order; j > prev_order; j--)
+		{
+			// std::cout << "j: " << j << std::endl;
+			int	current_pair = j - 2;
+			size_t idx = current_pair * n_per_pair + (n_per_pair - 1);
+			size_t right;
+			if (pend[idx] != vect_pair[current_pair].first)
+				right = main_chain.size() / n_per_pair - 1;
+			else
+				right = std::distance(main_chain.begin(),std::find(main_chain.begin(),main_chain.end(), vect_pair[current_pair].second)) / n_per_pair;
+			std::cout << "TO INSERT!!!! " << pend[idx] << " ";
+			std::cout << "current pair: " << current_pair << " vect pair: " << vect_pair[current_pair].second << std::endl; 
+			binarysearch(main_chain, pend, pend[idx], n_per_pair, right);
+		}
+		prev_order = order;
+	}
 }
 
 void	PmergeMe::ford_vector(int recurs_lvl)
@@ -127,6 +175,7 @@ void	PmergeMe::ford_vector(int recurs_lvl)
 	vect_pair = init_container<std::vector<std::pair<int, int> > >(this->_vec, n_per_pair);
 	if (vect_pair.empty())
 		return;
+	std::cout << "number per pair: " << n_per_pair << std::endl;
 	std::cout << "current Pairs: ";
 	print_container_pair(vect_pair);
 	std::cout << std::endl;
