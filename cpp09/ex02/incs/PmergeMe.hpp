@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:48:46 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/29 22:33:01 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/06/30 14:45:44 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ class PmergeMe
 		std::vector<int> jacobsthal(size_t n);
 		void	use_jacobsthal(std::vector<std::pair<int, int> > &vect_pair,int &n_per_pair, std::vector<int> &main_chain, std::vector<int> &pend);
 		std::vector	<int>init_chains(std::vector<std::pair<int, int> > &vect_pair, int &n_per_pair, std::vector<int> &pend);
-		void	binarysearch(std::vector<int> &main_chain, std::vector<int> &pend, int &to_compare, int &n_per_pair, size_t &right);
+		size_t	binarysearch(std::vector<int> &main_chain, std::vector<int> &pend, int &to_compare, int &n_per_pair, size_t &right);
 
 		template <typename c_pair, typename Container>
 		c_pair init_container(Container &cont, int &n_per_pair)
