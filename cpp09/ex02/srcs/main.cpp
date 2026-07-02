@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:49:30 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/06/29 17:25:32 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/07/02 17:50:16 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int main(int argc, char **argv)
 		if (pmo.parse(argv[i]) == false)
 			return (1);
 	}
+
 	std::cout << "-----------------------Sorting Vector-----------------------" << std::endl;
 	pmo.sort_vector();
 	std::cout << "-----------------------Sorting Deque-----------------------" << std::endl;
-	// pmo.sort_deque();
+	pmo.sort_deque();
 }
